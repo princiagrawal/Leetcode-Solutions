@@ -6,23 +6,40 @@ using namespace std;
 // } Driver Code Ends
 class Solution{
     public:
-        //Function to merge the arrays.
-        void merge(long long arr1[], long long arr2[], int n, int m) 
-        { 
-            // code here 
-            int i=n-1,j=0;
-            while(i>=0 && j<m){
-                if(arr1[i]>arr2[j]){
-                    swap(arr1[i],arr2[j]);
-                    i--;
-                    j++;
-                }
-                else{
-                    i--;
-                }
+    
+        void swapEle(long long arr1[], long long arr2[], int left, int right){//swap the elements if they are in wrong order
+            if(arr1[left]>arr2[right]){
+                swap(arr1[left],arr2[right]);
             }
-            sort(arr1,arr1+n);
-            sort(arr2,arr2+m);
+        }
+    
+        void merge(long long arr1[], long long arr2[], int n, int m) //by striver
+        { // using gap method
+            int len=n+m;
+            int gap=(len/2)+(len%2);//ceil value of len/2
+            while(gap>0){
+                int left=0,right=gap+left;
+                while(right<len){
+                    // left is in arr1 and right is in arr2
+                    if(left<n &&  right>=n){
+                        swapEle(arr1,arr2,left,right-n);
+                    }
+                    // left is in arr2 and right will always be in arr2
+                    else if(left>=n){
+                        swapEle(arr2,arr2,left-n,right-n);
+                    }
+                    // left is in arr1 and right is in arr1
+                    else if(left<n &&  right<n){
+                        swapEle(arr1,arr1,left,right);
+                    }
+                    left++;
+                    right++;
+                }
+                if(gap==1){
+                    break;//agr gap==1 phirse hota h toh (repetition)
+                }
+                gap=(gap/2)+(gap%2);//ceil value of gap/2
+            }
         } 
 };
 
