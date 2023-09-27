@@ -7,14 +7,12 @@ class Solution
 {
 public:
 
-    void solve(vector<int>&arr,int n,vector<int>&ans,int ind,int sum){
+    void solve(vector<int>arr,int n,vector<int>&ans,int ind,int sum){
         if(ind==n){
             ans.push_back(sum);
             return ;
         }
-        sum+=arr[ind];
-        solve(arr,n,ans,ind+1,sum);
-        sum-=arr[ind];
+        solve(arr,n,ans,ind+1,sum+arr[ind]);
         solve(arr,n,ans,ind+1,sum);
     }
 
