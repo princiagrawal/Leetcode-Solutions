@@ -111,25 +111,34 @@ class Solution{
         }
         int lh=height(root->left);
         int rh=height(root->right);
+        if(lh==-1 || rh==-1){
+            return -1;
+        }
+        if(abs(lh-rh)>1){
+            return -1;
+        }
         return 1+max(lh,rh);
     }
     
     bool isBalanced(Node *root){
         //TC=O(N^2)
-        if(!root){
-            return 1;
-        }
-        int leftH=height(root->left);
-        int rightH=height(root->right);
-        if(abs(leftH-rightH)>1){
-            return 0;
-        }
-        int leftRoot=isBalanced(root->left);
-        int rightRoot=isBalanced(root->right);
-        if(!leftRoot || !rightRoot){
-            return 0;
-        }
-        return 1;
+        // if(!root){
+        //     return 1;
+        // }
+        // int leftH=height(root->left);
+        // int rightH=height(root->right);
+        // if(abs(leftH-rightH)>1){
+        //     return 0;
+        // }
+        // int leftRoot=isBalanced(root->left);
+        // int rightRoot=isBalanced(root->right);
+        // if(!leftRoot || !rightRoot){
+        //     return 0;
+        // }
+        // return 1;
+        
+        //Tc=O(N)
+        return height(root)!=-1;
     }
 };
 
